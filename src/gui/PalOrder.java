@@ -213,18 +213,18 @@ public class PalOrder extends javax.swing.JPanel {
         tbDonHang.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tbDonHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã HX", "Tên Món", "SL", "Đơn giá"
+                "Mã HX", "Tên Món", "SL", "Đơn giá", "Ngày giao"
             }
         ));
         tbDonHang.setRowHeight(23);
@@ -237,7 +237,8 @@ public class PalOrder extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tbDonHang);
         if (tbDonHang.getColumnModel().getColumnCount() > 0) {
-            tbDonHang.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbDonHang.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tbDonHang.getColumnModel().getColumn(1).setPreferredWidth(250);
             tbDonHang.getColumnModel().getColumn(3).setPreferredWidth(130);
         }
 
@@ -441,7 +442,7 @@ public class PalOrder extends javax.swing.JPanel {
         buttonGroup1.add(radDa);
         radDa.setText("Đã giao hàng");
 
-        lblStt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblStt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblStt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -450,11 +451,22 @@ public class PalOrder extends javax.swing.JPanel {
         palEditMenuLayout.setHorizontalGroup(
             palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(palEditMenuLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(palEditMenuLayout.createSequentialGroup()
                 .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(palEditMenuLayout.createSequentialGroup()
+                        .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(palEditMenuLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel11))
+                            .addGroup(palEditMenuLayout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnAdd)
+                                    .addComponent(btnDelete))
+                                .addGap(28, 28, 28)
+                                .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnClear)
+                                    .addComponent(btnUpdate))))
+                        .addGap(0, 62, Short.MAX_VALUE))
                     .addGroup(palEditMenuLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,25 +486,8 @@ public class PalOrder extends javax.swing.JPanel {
                                         .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(radDa)
                                             .addComponent(radChua))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(palEditMenuLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(palEditMenuLayout.createSequentialGroup()
-                                .addComponent(btnDelete)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(palEditMenuLayout.createSequentialGroup()
-                                .addComponent(btnAdd)
-                                .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(palEditMenuLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblStt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, palEditMenuLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                                        .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnClear)
-                                            .addComponent(btnUpdate))
-                                        .addGap(32, 32, 32)))))))
+                            .addComponent(lblStt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         palEditMenuLayout.setVerticalGroup(
@@ -520,16 +515,16 @@ public class PalOrder extends javax.swing.JPanel {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblStt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -568,7 +563,7 @@ public class PalOrder extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,7 +691,8 @@ public class PalOrder extends javax.swing.JPanel {
                         ship.getMaHX(),
                         daoMenu.findById(ship.getMaMon()).getTenMon(),
                         ship.getSoLuong(),
-                        fomater.format(ship.getDonGia())
+                        fomater.format(ship.getDonGia()),
+                        ship.getNgayGiao()
                     };
                     model.addRow(row);
                 }

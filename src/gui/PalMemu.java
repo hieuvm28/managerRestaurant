@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.function.ObjDoubleConsumer;
 import javax.swing.DefaultComboBoxModel;
@@ -31,6 +32,7 @@ public class PalMemu extends javax.swing.JPanel {
     /**
      * Creates new form PalMemu
      */
+    DecimalFormat fomat= new DecimalFormat("###,###,###");
     DAO_Category daoCate = new DAO_Category();
     DAO_Menu daoMenu = new DAO_Menu();
     int index;
@@ -421,7 +423,7 @@ public class PalMemu extends javax.swing.JPanel {
                 Object[] row = new Object[]{
                     menu.getMaMon(),
                     menu.getTenMon(),
-                    menu.getDonGia()
+                   fomat.format( menu.getDonGia())
                 };
                 model.addRow(row);
             }

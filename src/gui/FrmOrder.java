@@ -615,7 +615,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
             String sql = "select HoaDonChiTiet.MaHD, HoaDonChiTiet.MaMon, Menu.TenMon, HoaDon.MaBan, Ban.TenBan, HoaDonChiTiet.SoLuong, HoaDonChiTiet.DonGia,MaNhanVien, NgayLap, Gio\n"
                     + "from Ban join HoaDon on Ban.MaBan = HoaDon.MaBan\n"
                     + "join HoaDonChiTiet on HoaDon.MaHD = HoaDonChiTiet.MaHD\n"
-                    + "join Menu on HoaDonChiTiet.MaMon = Menu.MaMon where HoaDonChiTiet.MaHD = 8 order by HoaDonChiTiet.MaHD DESC";
+                    + "join Menu on HoaDonChiTiet.MaMon = Menu.MaMon where HoaDonChiTiet.MaHD = " + maHD + " order by HoaDonChiTiet.MaHD DESC";
             JRDesignQuery updateQuery = new JRDesignQuery();
             updateQuery.setText(sql);            
             jdesign.setQuery(updateQuery);

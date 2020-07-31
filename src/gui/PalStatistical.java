@@ -38,8 +38,9 @@ public class PalStatistical extends javax.swing.JPanel {
     public PalStatistical() {
         initComponents();
         btnRemove.setVisible(false);
-        loadStatistical();
-        loadDonHang();
+//        loadStatistical();
+//        loadDonHang();
+        load();
     }
 
     /**
@@ -94,11 +95,6 @@ public class PalStatistical extends javax.swing.JPanel {
                 cbbTKItemStateChanged(evt);
             }
         });
-        cbbTK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbTKActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Tổng số hóa đơn");
@@ -151,6 +147,12 @@ public class PalStatistical extends javax.swing.JPanel {
         jDateChooser2.setBackground(new java.awt.Color(153, 255, 153));
 
         jLabel6.setText("TO");
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MousePressed(evt);
+            }
+        });
 
         tbStatistical.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tbStatistical.setModel(new javax.swing.table.DefaultTableModel(
@@ -361,10 +363,6 @@ public class PalStatistical extends javax.swing.JPanel {
         new FrmTable().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void cbbTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTKActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbTKActionPerformed
-
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         load();
     }//GEN-LAST:event_txtSearchKeyReleased
@@ -376,8 +374,9 @@ public class PalStatistical extends javax.swing.JPanel {
     private void cbbTKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTKItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             type = cbbTK.getSelectedItem().toString();
+            load();
         } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
-            //Do any operations you need to do when an item is de-selected.
+
         }
     }//GEN-LAST:event_cbbTKItemStateChanged
 
@@ -446,6 +445,10 @@ public class PalStatistical extends javax.swing.JPanel {
         btnRemove.setVisible(true);
     }//GEN-LAST:event_radRemoveByIdActionPerformed
 
+    private void jTabbedPane1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MousePressed
+         load();
+    }//GEN-LAST:event_jTabbedPane1MousePressed
+
     public void load() {
         if (jTabbedPane1.getSelectedIndex() == 0) {
             loadStatistical();
@@ -485,8 +488,7 @@ public class PalStatistical extends javax.swing.JPanel {
 
             for (Statistical sta : list) {
                 double thanhTien = sta.getSoLuong() * sta.getDonGia();
-                sum += thanhTien;
-                txtDoanhThu.setText(fomater.format(sum) + " VNĐ");
+
                 Object[] row = new Object[]{
                     sta.getMaNhanVien(),
                     sta.getMaHD(),
@@ -497,6 +499,8 @@ public class PalStatistical extends javax.swing.JPanel {
                     sta.getNgayLapHD(),
                     sta.getGio()
                 };
+                sum += thanhTien;
+                txtDoanhThu.setText(fomater.format(sum) + " VNĐ");
                 model.addRow(row);
             }
 
@@ -509,17 +513,39 @@ public class PalStatistical extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
         model.setRowCount(0);
         try {
-            ArrayList<Ship> list = daoShip.select();
+            double sum = 0;
+            ArrayList<Ship> list = new ArrayList<>();
+            type = cbbTK.getSelectedItem().toString();
+            String keyword = txtSearch.getText();
+            if (type.trim().equals("All")) {
+                list = daoShip.select();
+            } else if (type.trim().equals("Tháng")) {
+                int month = Integer.parseInt(keyword);
+                list = daoShip.findByMonth(month);
+            } else if (type.equals("Ngày")) {
+                int day = Integer.parseInt(keyword);
+                list = daoShip.findByDay(day);
+            } else if (type.equals("Năm")) {
+                int year = Integer.parseInt(keyword);
+                list = daoShip.findByYear(year);
+            } else if (type.equals("Hóa đơn")) {
+                int maHX = Integer.parseInt(keyword);
+                list = daoShip.finByHX(maHX);
+            }
             for (Ship ship : list) {
+                double thanhTien = ship.getSoLuong() * ship.getDonGia();
+
                 Object[] row = new Object[]{
                     ship.getMaHX(),
                     daoMenu.findById(ship.getMaMon()).getTenMon(),
                     ship.getSoLuong(),
                     fomater.format(ship.getDonGia()),
-                    fomater.format(ship.getSoLuong() * ship.getDonGia()),
+                    fomater.format(thanhTien),
                     ship.getNgayDat(),
                     ship.getNgayGiao()
                 };
+                sum += thanhTien;
+                txtDoanhThu.setText(fomater.format(sum) + " VNĐ");
                 model.addRow(row);
             }
         } catch (Exception e) {

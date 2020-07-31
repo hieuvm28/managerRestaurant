@@ -84,6 +84,7 @@ public class DAO_Book {
         model.setSttTT(rs.getString(5));
         Date date = DateHelper.addDays(rs.getDate(6), 2);
         model.setNgayDat(DateHelper.toString(date));
+        model.setGioDen(rs.getString(7));
         return model;
     }
 }
