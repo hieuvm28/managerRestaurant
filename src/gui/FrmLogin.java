@@ -29,7 +29,7 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         btnSignIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-         System.out.println("Hiếu vừa sửa");
+        
    }
 
     /**
