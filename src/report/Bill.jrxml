@@ -18,7 +18,7 @@ join Menu on HoaDonChiTiet.MaMon = Menu.MaMon where HoaDonChiTiet.MaHD = 8 order
 	<field name="SoLuong" class="java.lang.Integer"/>
 	<field name="DonGia" class="java.lang.Double"/>
 	<field name="MaNhanVien" class="java.lang.String"/>
-	<field name="NgayLap" class="java.sql.Date"/>
+	<field name="NgayLap" class="java.util.Date"/>
 	<field name="Gio" class="java.lang.String"/>
 	<variable name="TONG_HD" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{SoLuong}*$F{DonGia}]]></variableExpression>

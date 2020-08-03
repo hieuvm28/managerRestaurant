@@ -573,6 +573,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         int row = tbDsMenu.getSelectedRow();
         if (row >= 0) {
             index = row;
+            btnOrder.setEnabled(true);
         }
     }//GEN-LAST:event_tbDsMenuMouseClicked
 
@@ -592,6 +593,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         int row = tbHDCT.getSelectedRow();
         if (row >= 0) {
             index = row;
+            btnOrder.setEnabled(false);
         }
     }//GEN-LAST:event_tbHDCTMouseClicked
 
@@ -750,6 +752,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Đã có món này");
                     e.printStackTrace();
+                    return;
                 }
             } else {
                 try {
@@ -763,7 +766,10 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                         maHD = hd.getMaHoaDon();
                         System.out.println("Mã hóa đơn khi bàn đang phục vụ: " + maHD);
                     }
-                    //                   maHD = Integer.parseInt(lblMaHD.getText());
+                    
+                    
+                    
+//                   maHD = Integer.parseInt(lblMaHD.getText());
 //                    else if (table.getTrangThai().trim().equals("Trống")) {
 //                        maHD = list.get(0).getMaHoaDon();
 //                        System.out.println("Mã hóa đơn khi click vào bàn trộng " + maHD);
@@ -773,9 +779,10 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
 
                     loadDsHoaDon(maHD);
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Đã có món này");
-                    e.printStackTrace();
+                } catch (Exception e) {                 
+                   JOptionPane.showMessageDialog(this, "Đã có món này");
+                   e.printStackTrace();
+                    return;
                 }
 
             }
@@ -787,6 +794,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         HoaDonCT model = getModelHDCTToUpdate();
         try {
             daoDHCT.update(model);
+            System.out.println("Mã hóa đơn sau khi thêm " + maHD);
             loadDsHoaDon(maHD);
         } catch (Exception e) {
             e.printStackTrace();
@@ -831,13 +839,15 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
 
     public HoaDonCT getModelHDCTToUpdate() {
         HoaDonCT model = new HoaDonCT();
+        maHD = Integer.parseInt(lblMaHD.getText());
+        System.out.println("Mã hóa đơn trước khi update " + maHD);
         ArrayList<Statistical> list = daoSta.showHoaDon(maHD);
         maMon = list.get(index).getMaMon();
         double donGia = list.get(index).getDonGia();
-        model.setMaHoaDon(Integer.parseInt(lblMaHD.getText()));
+        model.setMaHoaDon(maHD);
         model.setMaMon(maMon);
         System.out.println("Mã món để thêm vào HDCT " + maMon);
-        model.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
+        model.setSoLuong(Integer.parseInt(txtSoLuong.getText()) + list.get(index).getSoLuong());
         model.setDonGia(donGia);
         model.setGio(lblTime.getText());
         return model;
