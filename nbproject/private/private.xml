@@ -16,11 +16,14 @@
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Statistical.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Ship.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalOrder.java</file>
+            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_HoaDon.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalHome.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Employee.java</file>
+            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_HoaDonCT.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalMemu.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalBook.java</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/jdbcHelper/JdbcHelper.java</file>
+            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/report/Bill.jrxml</file>
             <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Book.java</file>
         </group>
     </open-files>
