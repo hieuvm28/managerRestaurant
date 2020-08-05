@@ -54,6 +54,12 @@ public class FrmMain extends javax.swing.JFrame implements MouseListener {
         jPanel3.updateUI();
         
         //loadTable(32);
+       lblUser.setText(ShareHelper.USER.getMaNV());
+        if (ShareHelper.USER.isRole()) {
+            lblRole.setText("Quản lý");
+        } else {
+            lblRole.setText("Nhân viên");
+        }
        
     }
 
