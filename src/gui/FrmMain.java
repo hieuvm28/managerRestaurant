@@ -61,6 +61,7 @@ public class FrmMain extends javax.swing.JFrame implements MouseListener {
             lblRole.setText("Nhân viên");
         }
        
+        phanQuyen();
     }
 
     /**
@@ -781,6 +782,15 @@ public class FrmMain extends javax.swing.JFrame implements MouseListener {
         pal1.setBackground(new Color(51, 102, 255));
     }
 
+    public void phanQuyen(){
+        if (!(ShareHelper.USER.isRole())) {
+            btnMenu.setVisible(false);
+            btnPurchase.setVisible(false);
+            btnStatistical.setVisible(false);
+            btnEmployee.setVisible(false);
+        }
+    }
+    
 //    public void loadTable(int soBan) {
 //       PalTable.setLayout(new GridLayout((soBan/5) + 1, 5, 10, 10));
 //
