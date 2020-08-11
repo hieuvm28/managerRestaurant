@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jdbcHelper.ShareHelper;
 import model.Ship;
 import model.Statistical;
 
@@ -41,6 +42,8 @@ public class PalStatistical extends javax.swing.JPanel {
 //        loadStatistical();
 //        loadDonHang();
         load();
+        //load Tổng hóa đơn
+        
     }
 
     /**
@@ -468,10 +471,13 @@ public class PalStatistical extends javax.swing.JPanel {
             type = cbbTK.getSelectedItem().toString();
             String keyword = txtSearch.getText();
             if (type.trim().equals("All")) {
+                txtSearch.setText("");
                 list = daoSta.select();
+                txtSumBill.setText(Integer.toString(daoHDCT.sumBillHD()));
             } else if (type.trim().equals("Tháng")) {
                 int month = Integer.parseInt(keyword);
                 list = daoSta.findByMonth(month);
+                txtSumBill.setText(Integer.toString(daoHDCT.sumBillHDbyMonth(month)));
             } else if (type.equals("Ngày")) {
                 int day = Integer.parseInt(keyword);
                 list = daoSta.findByDay(day);
@@ -485,7 +491,7 @@ public class PalStatistical extends javax.swing.JPanel {
                 int maHD = Integer.parseInt(keyword);
                 list = daoSta.findByHoaDon(maHD);
             }
-
+            
             for (Statistical sta : list) {
                 double thanhTien = sta.getSoLuong() * sta.getDonGia();
 
@@ -509,6 +515,7 @@ public class PalStatistical extends javax.swing.JPanel {
 
     }
 
+    
     public void loadDonHang() {
         DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
         model.setRowCount(0);
@@ -517,11 +524,15 @@ public class PalStatistical extends javax.swing.JPanel {
             ArrayList<Ship> list = new ArrayList<>();
             type = cbbTK.getSelectedItem().toString();
             String keyword = txtSearch.getText();
+           
             if (type.trim().equals("All")) {
+                txtSearch.setText("");
                 list = daoShip.select();
+                txtSumBill.setText(Integer.toString(daoHDCT.sumBillHX()));
             } else if (type.trim().equals("Tháng")) {
                 int month = Integer.parseInt(keyword);
                 list = daoShip.findByMonth(month);
+                txtSumBill.setText(Integer.toString(daoHDCT.sumBillHXbyMonth(month)));
             } else if (type.equals("Ngày")) {
                 int day = Integer.parseInt(keyword);
                 list = daoShip.findByDay(day);
@@ -532,6 +543,7 @@ public class PalStatistical extends javax.swing.JPanel {
                 int maHX = Integer.parseInt(keyword);
                 list = daoShip.finByHX(maHX);
             }
+            
             for (Ship ship : list) {
                 double thanhTien = ship.getSoLuong() * ship.getDonGia();
 

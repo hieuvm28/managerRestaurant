@@ -50,6 +50,11 @@ public class DAO_Menu {
         return select(sql, "%" + tenMon + "%", maLoai);
     }
    
+    public ArrayList<Menu> findByTenMon1(String tenMon) {
+        String sql = "select * from Menu where TenMon like ?";
+        return select(sql, "%" + tenMon + "%");
+    }
+    
     public ArrayList<Menu> findByMaLoai(int maLoai) {
         String sql = "select * from Menu where MaLoai = ?";
         return select(sql, maLoai);

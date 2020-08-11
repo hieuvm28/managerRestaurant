@@ -52,17 +52,63 @@ public class DAO_HoaDonCT {
         JdbcHelper.executeUpdate(sql);
     }
     
-   public int sumBill(){
+      public int sumBillHDbyMonth(int month){
         try {
-            String sql = "select count(Distinct(MaHD) ) from HoaDonChiTiet";
+            String sql = "select count(Distinct(HoaDonChiTiet.MaHD) ) from HoaDonChiTiet join HoaDon on HoaDonChiTiet.MaHD = HoaDon.MaHD where MONTH(NgayLap) = " + month;
             ResultSet rs = JdbcHelper.executeQuery(sql);
-           int sum = rs.getInt(1);
+            int sum = 0;
+            while(rs.next()){
+            sum = rs.getInt(1);
+            }
+           return sum;
         } catch (SQLException ex) {
-            
+            ex.printStackTrace();
+        }
+        return 0;
+   }
+     public int sumBillHXbyMonth(int month){
+        try {
+            String sql = "select count(Distinct(HoaDonChiTiet.MaHX) ) from HoaDonChiTiet join HoaDon on HoaDonChiTiet.MaHD = HoaDon.MaHD where MONTH(NgayLap) = " + month;
+            ResultSet rs = JdbcHelper.executeQuery(sql);
+            int sum = 0;
+            while (rs.next()) {                
+                 sum = rs.getInt(1);
+            }
+            return sum;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return 0;
    }
     
+   public int sumBillHD(){
+        try {
+            String sql = "select count(Distinct(MaHD)) from HoaDonChiTiet";
+            ResultSet rs = JdbcHelper.executeQuery(sql);
+            int sum = 0;
+            while(rs.next()){
+            sum = rs.getInt(1);
+            }
+           return sum;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+   }
+     public int sumBillHX(){
+        try {
+            String sql = "select count(Distinct(MaHX)) from HangXuat";
+            ResultSet rs = JdbcHelper.executeQuery(sql);
+            int sum = 0;
+            while (rs.next()) {                
+                 sum = rs.getInt(1);
+            }
+            return sum;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+   }
     private HoaDonCT readFromResultSet(ResultSet rs) throws SQLException{
         HoaDonCT model = new HoaDonCT();
         model.setMaHoaDon(rs.getInt(1));

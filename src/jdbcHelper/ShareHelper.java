@@ -60,7 +60,7 @@ public class ShareHelper {
      */
    public static Employee USER = null;
     
-   
+   public static int SUM_BILL = 0; 
    
     
     /**
@@ -80,6 +80,5 @@ public class ShareHelper {
     /**
      *
      */
-    public static HoaDon HOADON = null;
     public static int MAHD = 0;
 }

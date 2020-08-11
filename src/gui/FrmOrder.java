@@ -64,7 +64,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
     DAO_Table daoTable = new DAO_Table();
     ArrayList<Menu> listDSMenu = new ArrayList<>();
 
-    int maLoai;
+    int maLoai ;
     int maHD;
     int k = 0;
     int index;
@@ -86,6 +86,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
 
         Thread time = new Thread(this);
         time.start();
+        loadListMenu();
     }
 
     /**
@@ -108,6 +109,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         btnOrder = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtSoLuong = new javax.swing.JTextField();
+        btnAll = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         lblBan = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -213,6 +215,13 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
 
         txtSoLuong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        btnAll.setText("ALL");
+        btnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -220,11 +229,14 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
             .addComponent(jScrollPane3)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(12, 12, 12)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnAll, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,10 +257,15 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAll)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -561,7 +578,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        loadDSMenu();
+        loadListMenu();
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
@@ -631,6 +648,11 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jLabel26MousePressed
 
+    private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllActionPerformed
+       txtSearch.setText("");
+        loadListMenu();
+    }//GEN-LAST:event_btnAllActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -696,6 +718,30 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
 
     }
 
+    public void loadListMenu(){
+       DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
+        model.setRowCount(0);
+        String search = txtSearch.getText();
+        ArrayList<Menu> list = new ArrayList<>();
+        try {
+             if (search.equals("")) {
+                 list = daoMenu.select();
+            } else {
+                list = daoMenu.findByTenMon1(search);
+            }
+           
+              for (Menu menu : list) {
+                Object[] row = new Object[]{
+                    menu.getTenMon(),
+                    fomater.format(menu.getDonGia())
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+        
+    }
+    
     public void loadDSMenu() {
         DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
         model.setRowCount(0);
@@ -943,6 +989,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAll;
     private javax.swing.JButton btnOrder;
     private javax.swing.JLabel btnThanhToan;
     private javax.swing.JButton jButton2;

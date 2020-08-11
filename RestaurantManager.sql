@@ -187,7 +187,8 @@ select * from HoaDon --where MaBan = 4 --order by MaHD DESC
 --select * from HangNhap where month(NgayNhap) = 6
 select * from HoaDonChiTiet
 select HoaDon.MaHD, MaBan, MaMon, SoLuong from HoaDon join HoaDonChiTiet on HoaDon.MaHD = HoaDonChiTiet.MaHD where MaBan = 7
-select count(Distinct(MaHD) ) from HoaDonChiTiet
+select count(Distinct(HoaDonChiTiet.MaHD) ) from HoaDonChiTiet join HoaDon on HoaDonChiTiet.MaHD = HoaDon.MaHD where MONTH(NgayLap) = 7
+select count(Distinct(HoaDonChiTiet.MaHD) ) from HoaDonChiTiet
 select sum(SoLuong * DonGia) from HoaDonChiTiet
 select * from HangXuat
 --delete from Ban where MaBan = 27
