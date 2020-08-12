@@ -175,7 +175,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                 {null, null}
             },
             new String [] {
-                "TÊN MÓN", "ĐƠN GIÁ"
+                "THE NAME OF FOOD", "PRICE"
             }
         ));
         tbDsMenu.setGridColor(new java.awt.Color(255, 255, 255));
@@ -211,7 +211,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Số lượng");
+        jLabel1.setText("Quantity");
 
         txtSoLuong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -280,7 +280,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         });
 
         lblBan.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblBan.setText("ban");
+        lblBan.setText("Table");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -722,15 +722,15 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
        DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
         model.setRowCount(0);
         String search = txtSearch.getText();
-        ArrayList<Menu> list = new ArrayList<>();
+        listDSMenu = new ArrayList<>();
         try {
              if (search.equals("")) {
-                 list = daoMenu.select();
+                 listDSMenu = daoMenu.select();
             } else {
-                list = daoMenu.findByTenMon1(search);
+                listDSMenu = daoMenu.findByTenMon1(search);
             }
            
-              for (Menu menu : list) {
+              for (Menu menu : listDSMenu) {
                 Object[] row = new Object[]{
                     menu.getTenMon(),
                     fomater.format(menu.getDonGia())

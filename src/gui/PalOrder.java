@@ -42,14 +42,15 @@ public class PalOrder extends javax.swing.JPanel {
     DAO_Ship daoship = new DAO_Ship();
     int maLoai;
     int maHD;
-    int index;
+    int index = -1;
     int maMon;
     ArrayList<Menu> listDsMenu = new ArrayList<>();
-
+    
     public PalOrder() {
         initComponents();
         loadTypeMenu();
         loadDonHang();
+        loadListMenu();
     }
 
     /**
@@ -101,7 +102,6 @@ public class PalOrder extends javax.swing.JPanel {
         btnClear = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         radChua = new javax.swing.JRadioButton();
-        radDa = new javax.swing.JRadioButton();
         lblStt = new javax.swing.JLabel();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(102, 255, 153));
@@ -438,10 +438,6 @@ public class PalOrder extends javax.swing.JPanel {
         radChua.setSelected(true);
         radChua.setText("Chưa giao hàng");
 
-        radDa.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(radDa);
-        radDa.setText("Đã giao hàng");
-
         lblStt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblStt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -483,9 +479,7 @@ public class PalOrder extends javax.swing.JPanel {
                                     .addComponent(jLabel10)
                                     .addGroup(palEditMenuLayout.createSequentialGroup()
                                         .addGap(10, 10, 10)
-                                        .addGroup(palEditMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(radDa)
-                                            .addComponent(radChua))))
+                                        .addComponent(radChua)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(lblStt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -509,8 +503,6 @@ public class PalOrder extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(radChua)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(radDa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -574,7 +566,7 @@ public class PalOrder extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        loadDSMenu();
+        loadListMenu();
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -582,7 +574,14 @@ public class PalOrder extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnThanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThanhToanMousePressed
-        thanhToan();
+        
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn cần thanh toán");
+        } else {
+            thanhToan();
+            index = -1;
+        }
+
     }//GEN-LAST:event_btnThanhToanMousePressed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -596,7 +595,7 @@ public class PalOrder extends javax.swing.JPanel {
             int maMon = listDsMenu.get(index).getMaMon();
             System.out.println("Mã món " + maMon);
             cbbDVT.getModel().setSelectedItem(listDsMenu.get(index).getDVT());
-
+            
         }
     }//GEN-LAST:event_tbDsMenuMouseClicked
 
@@ -624,7 +623,7 @@ public class PalOrder extends javax.swing.JPanel {
     private void cbbDVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbDVTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbDVTActionPerformed
-
+    
     public void loadTypeMenu() {
         // Lấy số loại
         ArrayList<Category> list = daoCate.select();
@@ -632,9 +631,9 @@ public class PalOrder extends javax.swing.JPanel {
         palLoai.setLayout(new GridLayout(list.size(), 1, 5, 5));
         palLoai.removeAll();
         palLoai.updateUI();
-
+        
         JLabel lbl[] = new JLabel[list.size()];
-
+        
         for (int i = 0; i < list.size(); i++) {
             lbl[i] = new JLabel(list.get(i).getTenLoai());
             lbl[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -653,21 +652,45 @@ public class PalOrder extends javax.swing.JPanel {
             });
             palLoai.add(lbl[i]);
         }
-
+        
     }
-
+    
+    public void loadListMenu() {
+        DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
+        model.setRowCount(0);
+        String search = txtSearch.getText();
+        listDsMenu = new ArrayList<>();
+        try {
+            if (search.equals("")) {
+                listDsMenu = daoMenu.select();
+            } else {
+                listDsMenu = daoMenu.findByTenMon1(search);
+            }
+            
+            for (Menu menu : listDsMenu) {
+                Object[] row = new Object[]{
+                    menu.getTenMon(),
+                    fomater.format(menu.getDonGia())
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+        
+    }
+    
     public void loadDSMenu() {
         DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
         model.setRowCount(0);
         try {
             String search = txtSearch.getText();
-
+            
             if (search.equals("")) {
                 listDsMenu = daoMenu.findByMaLoai(maLoai);
             } else {
                 listDsMenu = daoMenu.findByTenMon(maLoai, search);
             }
-
+            
             for (Menu menu : listDsMenu) {
                 Object[] row = new Object[]{
                     menu.getTenMon(),
@@ -678,11 +701,11 @@ public class PalOrder extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     public void loadDonHang() {
         DefaultTableModel model = (DefaultTableModel) tbDonHang.getModel();
         model.setRowCount(0);
-
+        
         try {
             ArrayList<Ship> list = daoship.select();
             for (Ship ship : list) {
@@ -696,12 +719,12 @@ public class PalOrder extends javax.swing.JPanel {
                     };
                     model.addRow(row);
                 }
-
+                
             }
         } catch (Exception e) {
         }
     }
-
+    
     public void insert() {
         DefaultTableModel model = (DefaultTableModel) tbDonHang.getModel();
         model.setRowCount(0);
@@ -710,12 +733,11 @@ public class PalOrder extends javax.swing.JPanel {
             daoship.insert(model1);
             loadDonHang();
             lblStt.setText("THÊM ĐƠN HÀNG THÀNH CÔNG");
- 
             
         } catch (Exception e) {
         }
     }
-
+    
     public void update() {
         Ship model = getModel();
         try {
@@ -725,7 +747,7 @@ public class PalOrder extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     public void delete() {
         int maHX = (int) tbDonHang.getValueAt(index, 0);
         daoship.delete(maHX);
@@ -733,21 +755,23 @@ public class PalOrder extends javax.swing.JPanel {
         clear();
         lblStt.setText("XÓA THÀNH CÔNG ĐƠN HÀNG");
     }
-
+    
     public void thanhToan() {
         DefaultTableModel model = (DefaultTableModel) tbDonHang.getModel();
         int row = tbDonHang.getSelectedRow();
-        radDa.setSelected(true);
-        Ship dh = getModel();
+        radChua.setSelected(true);
+        Ship dh = new Ship();
+        dh = getModel();
+        dh.setStt("Đã thanh toán");
         daoship.update(dh);
-
+        
         txtThanhTien.setText("");
         lblSTT2.setText("ĐÃ THANH TOAN ĐƠN HÀNG");
         clear();
-
+        
         model.removeRow(row);
     }
-
+    
     public Ship getModel() {
         Ship model = new Ship();
         double donGia;
@@ -762,7 +786,7 @@ public class PalOrder extends javax.swing.JPanel {
             model.setMaHX((int) tbDonHang.getValueAt(index, 0));
             System.out.println("Mã món khi ưt tab2 " + maMon);
         }
-
+        
         String ngayGiao = ((JTextField) txtNgayGiao.getDateEditor().getUiComponent()).getText();
         model.setMaMon(maMon);
         model.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
@@ -772,14 +796,12 @@ public class PalOrder extends javax.swing.JPanel {
         model.setNgayGiao(ngayGiao);
         if (radChua.isSelected()) {
             model.setStt(radChua.getText());
-        } else {
-            model.setStt(radDa.getText());
         }
         model.setDiaChi(txtDiaChi.getText());
         model.setMaNV(ShareHelper.USER.getMaNV());
         return model;
     }
-
+    
     public void setModel(Ship model) {
         txtSoLuong.setText(Integer.toString(model.getSoLuong()));
         cbbDVT.setSelectedItem(model.getDVT());
@@ -791,15 +813,12 @@ public class PalOrder extends javax.swing.JPanel {
         boolean stt;
         if (radChua.isSelected()) {
             radChua.setSelected(true);
-        } else {
-            radDa.setSelected(false);
         }
         
-        
     }
-
+    
     public void showDelt() {
-
+        
         try {
             int maHX = (int) tbDonHang.getValueAt(index, 0);
             Ship model = daoship.finfById(maHX);
@@ -807,7 +826,7 @@ public class PalOrder extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
+    
     public void clear() {
         Ship model = new Ship();
         setModel(model);
@@ -847,7 +866,6 @@ public class PalOrder extends javax.swing.JPanel {
     public javax.swing.JPanel palEditMenu;
     private javax.swing.JPanel palLoai;
     private javax.swing.JRadioButton radChua;
-    private javax.swing.JRadioButton radDa;
     private javax.swing.JTable tbDonHang;
     private javax.swing.JTable tbDsMenu;
     private javax.swing.JTextArea txtDiaChi;

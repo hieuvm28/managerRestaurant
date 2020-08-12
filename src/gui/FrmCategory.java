@@ -71,7 +71,7 @@ public class FrmCategory extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Mã loại", "Tên loại"
+                "ID Category", "Name Category"
             }
         ));
         tbCategory.setGridColor(new java.awt.Color(255, 255, 255));
@@ -95,7 +95,7 @@ public class FrmCategory extends javax.swing.JFrame {
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Tên loại");
+        jLabel1.setText("Name Category");
 
         txtTenLoai.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 

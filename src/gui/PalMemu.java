@@ -43,6 +43,7 @@ public class PalMemu extends javax.swing.JPanel {
         loadTypeMenu();       
         loadComboBoxType();
         clear();
+        loadListMenu();
     }
 
     /**
@@ -356,7 +357,7 @@ public class PalMemu extends javax.swing.JPanel {
     }//GEN-LAST:event_tbDsMenuMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        loadDSMenu();
+     loadListMenu();
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -406,7 +407,31 @@ public class PalMemu extends javax.swing.JPanel {
         }
         
     }
-    
+     public void loadListMenu(){
+       DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
+        model.setRowCount(0);
+        String search = txtSearch.getText();
+        ArrayList<Menu> list = new ArrayList<>();
+        try {
+             if (search.equals("")) {
+                 list = daoMenu.select();
+            } else {
+                list = daoMenu.findByTenMon1(search);
+            }
+           
+              for (Menu menu : list) {
+                Object[] row = new Object[]{
+                    menu.getMaMon(),
+                    menu.getTenMon(),
+                    fomat.format(menu.getDonGia())
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+        
+    }
+     
     public void loadDSMenu() {
         DefaultTableModel model = (DefaultTableModel) tbDsMenu.getModel();
         model.setRowCount(0);
