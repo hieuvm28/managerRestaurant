@@ -27,7 +27,7 @@ public class FrmCategory extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadCategory();
-        System.out.println("Hhahaha");
+        
     }
 
     /**
