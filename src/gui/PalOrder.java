@@ -22,10 +22,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import jdbcHelper.DateHelper;
+import jdbcHelper.JdbcHelper;
 import jdbcHelper.ShareHelper;
 import model.Category;
 import model.Menu;
 import model.Ship;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -51,6 +61,7 @@ public class PalOrder extends javax.swing.JPanel {
         loadTypeMenu();
         loadDonHang();
         loadListMenu();
+        btnBill.setVisible(false);
     }
 
     /**
@@ -78,11 +89,9 @@ public class PalOrder extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbDonHang = new javax.swing.JTable();
         btnThanhToan = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        btnBill = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblMaHX = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         lblThanhTien = new javax.swing.JLabel();
         txtThanhTien = new javax.swing.JTextField();
         lblSTT2 = new javax.swing.JLabel();
@@ -257,31 +266,26 @@ public class PalOrder extends javax.swing.JPanel {
             }
         });
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_print_48px.png"))); // NOI18N
-        jLabel26.setText("IN HÓA ĐƠN");
-        jLabel26.setToolTipText("");
-        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel26.setIconTextGap(-5);
-        jLabel26.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBill.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBill.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_print_48px.png"))); // NOI18N
+        btnBill.setText("IN HÓA ĐƠN");
+        btnBill.setToolTipText("");
+        btnBill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnBill.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBill.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBill.setIconTextGap(-5);
+        btnBill.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBillMousePressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("MÃ HÀNG SHIP: ");
 
         lblMaHX.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Tổng số đơn hàng");
-
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         lblThanhTien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblThanhTien.setForeground(new java.awt.Color(0, 0, 204));
@@ -302,20 +306,13 @@ public class PalOrder extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMaHX, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(12, 12, 12)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMaHX, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblThanhTien)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -333,15 +330,10 @@ public class PalOrder extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThanhToan)
-                    .addComponent(jLabel26)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lblMaHX, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnBill)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(lblMaHX, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblThanhTien)
@@ -579,6 +571,7 @@ public class PalOrder extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn hóa đơn cần thanh toán");
         } else {
             thanhToan();
+            btnBill.setVisible(true);
             index = -1;
         }
 
@@ -616,13 +609,29 @@ public class PalOrder extends javax.swing.JPanel {
         delete();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void cbbDVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbDVTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbDVTActionPerformed
+
+    private void btnBillMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBillMousePressed
+        try {
+            //JdbcHelper.getConnect();
+            JasperDesign jdesign = JRXmlLoader.load("E:\\Software Manager\\RestaurantManager\\RestaurantManager\\src\\report\\BillShip.jrxml");
+
+            String maHX = lblMaHX.getText();
+            String sql = "select * from HangXuat join Menu on HangXuat.MaMon = Menu.MaMon where MaHX = '" + maHX + "'";
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(sql);            
+            jdesign.setQuery(updateQuery);
+            
+            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport ,null , JdbcHelper.getConnect());
+            JasperViewer.viewReport(jprint);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+            System.out.println("Lỗi report");
+        }
+    }//GEN-LAST:event_btnBillMousePressed
     
     public void loadTypeMenu() {
         // Lấy số loại
@@ -768,8 +777,10 @@ public class PalOrder extends javax.swing.JPanel {
         txtThanhTien.setText("");
         lblSTT2.setText("ĐÃ THANH TOAN ĐƠN HÀNG");
         clear();
-        
+        Integer maHX  = (Integer) tbDonHang.getValueAt(index, 0);
+        lblMaHX.setText(Integer.toString(maHX));
         model.removeRow(row);
+        
     }
     
     public Ship getModel() {
@@ -833,6 +844,7 @@ public class PalOrder extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JLabel btnBill;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JLabel btnThanhToan;
@@ -843,8 +855,6 @@ public class PalOrder extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
@@ -857,7 +867,6 @@ public class PalOrder extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lblMaHX;
     private javax.swing.JLabel lblSTT2;

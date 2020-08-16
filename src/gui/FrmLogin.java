@@ -29,7 +29,8 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         btnSignIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+        txtUsername.setText("hieuvm");
+        txtPassword.setText("000000");
    }
 
     /**

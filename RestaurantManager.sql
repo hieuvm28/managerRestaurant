@@ -190,7 +190,7 @@ select HoaDon.MaHD, MaBan, MaMon, SoLuong from HoaDon join HoaDonChiTiet on HoaD
 select count(Distinct(HoaDonChiTiet.MaHD) ) from HoaDonChiTiet join HoaDon on HoaDonChiTiet.MaHD = HoaDon.MaHD where MONTH(NgayLap) = 7
 select count(Distinct(HoaDonChiTiet.MaHD) ) from HoaDonChiTiet
 select sum(SoLuong * DonGia) from HoaDonChiTiet
-select * from HangXuat
+select * from HangXuat join Menu on HangXuat.MaMon = Menu.MaMon where MaHX = N'12'
 --delete from Ban where MaBan = 27
 select * from DatBan 
 delete from HangXuat

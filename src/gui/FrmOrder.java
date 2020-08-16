@@ -87,6 +87,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         Thread time = new Thread(this);
         time.start();
         loadListMenu();
+        btnBill.setVisible(false);
     }
 
     /**
@@ -133,7 +134,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnThanhToan = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        btnBill = new javax.swing.JLabel();
         lblBan1 = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
 
@@ -470,19 +471,19 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_print_48px.png"))); // NOI18N
-        jLabel26.setText("IN HÓA ĐƠN");
-        jLabel26.setToolTipText("");
-        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel26.setIconTextGap(-5);
-        jLabel26.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBill.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBill.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_print_48px.png"))); // NOI18N
+        btnBill.setText("IN HÓA ĐƠN");
+        btnBill.setToolTipText("");
+        btnBill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnBill.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBill.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBill.setIconTextGap(-5);
+        btnBill.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBill.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel26MousePressed(evt);
+                btnBillMousePressed(evt);
             }
         });
 
@@ -520,7 +521,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                         .addGap(18, 18, 18)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 59, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -544,7 +545,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel26))
+                                .addComponent(btnBill))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -625,7 +626,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
         lblTienThua.setText(fomater.format(tienThua));
     }//GEN-LAST:event_txtKhachTraKeyReleased
 
-    private void jLabel26MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MousePressed
+    private void btnBillMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBillMousePressed
         try {
             //JdbcHelper.getConnect();
             JasperDesign jdesign = JRXmlLoader.load("E:\\Software Manager\\RestaurantManager\\RestaurantManager\\src\\report\\Bill.jrxml");
@@ -646,7 +647,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
             ex.printStackTrace();
             System.out.println("Lỗi report");
         }
-    }//GEN-LAST:event_jLabel26MousePressed
+    }//GEN-LAST:event_btnBillMousePressed
 
     private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllActionPerformed
        txtSearch.setText("");
@@ -948,6 +949,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
             model.setRowCount(0);
 
             updateSttBan();
+            btnBill.setVisible(true);
         }
 
     }
@@ -990,6 +992,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAll;
+    private javax.swing.JLabel btnBill;
     private javax.swing.JButton btnOrder;
     private javax.swing.JLabel btnThanhToan;
     private javax.swing.JButton jButton2;
@@ -1001,7 +1004,6 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
