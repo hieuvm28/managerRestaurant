@@ -461,6 +461,7 @@ public class PalStatistical extends javax.swing.JPanel {
             } else if (type.equals("Ngày")) {
                 int day = Integer.parseInt(keyword);
                 list = daoSta.findByDay(day);
+                txtSumBill.setText(Integer.toString(daoHDCT.sumBillHDbyDay(day)));
             } else if (type.equals("Năm")) {
                 int year = Integer.parseInt(keyword);
                 list = daoSta.findByYear(year);
@@ -516,6 +517,7 @@ public class PalStatistical extends javax.swing.JPanel {
             } else if (type.equals("Ngày")) {
                 int day = Integer.parseInt(keyword);
                 list = daoShip.findByDay(day);
+                txtSumBill.setText(Integer.toString(daoHDCT.sumBillHXbyMonth(day)));
             } else if (type.equals("Năm")) {
                 int year = Integer.parseInt(keyword);
                 list = daoShip.findByYear(year);

@@ -66,6 +66,20 @@ public class DAO_HoaDonCT {
         }
         return 0;
    }
+         public int sumBillHDbyDay(int day){
+        try {
+            String sql = "select count(Distinct(HoaDonChiTiet.MaHD) ) from HoaDonChiTiet join HoaDon on HoaDonChiTiet.MaHD = HoaDon.MaHD where DAY(NgayLap) = " + day;
+            ResultSet rs = JdbcHelper.executeQuery(sql);
+            int sum = 0;
+            while(rs.next()){
+            sum = rs.getInt(1);
+            }
+           return sum;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+   }
      public int sumBillHXbyMonth(int month){
         try {
             String sql = "select count(Distinct(HoaDonChiTiet.MaHX) ) from HoaDonChiTiet join HoaDon on HoaDonChiTiet.MaHD = HoaDon.MaHD where MONTH(NgayLap) = " + month;
@@ -81,6 +95,7 @@ public class DAO_HoaDonCT {
         return 0;
    }
     
+     
    public int sumBillHD(){
         try {
             String sql = "select count(Distinct(MaHD)) from HoaDonChiTiet";

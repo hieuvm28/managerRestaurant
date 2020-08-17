@@ -798,7 +798,6 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Đã có món này");
-                    e.printStackTrace();
                     return;
                 }
             } else {
@@ -828,7 +827,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
                 } catch (Exception e) {                 
                    JOptionPane.showMessageDialog(this, "Đã có món này");
-                   e.printStackTrace();
+                  
                     return;
                 }
 

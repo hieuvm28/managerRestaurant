@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import jdbcHelper.ShareHelper;
@@ -532,7 +533,7 @@ public class PalEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSdtActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       clear();
+        clear();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -548,7 +549,7 @@ public class PalEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_lblImageMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-insert();
+        insert();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void tbEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmployeeMouseClicked
@@ -564,7 +565,12 @@ insert();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        delete();
+
+        if (txtUsername.equals("hieuvm")) {
+            JOptionPane.showMessageDialog(this, "không thể xóa Quản lý");
+        } else {
+            delete();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void upImage(String fileImage) {
@@ -594,9 +600,9 @@ insert();
         model.setRowCount(0);
         try {
             ArrayList<Employee> list = daoEm.select();
-             String role;
+            String role;
             for (Employee em : list) {
-               
+
                 if (em.isRole()) {
                     role = "Trưởng phòng";
                 } else {
@@ -640,21 +646,22 @@ insert();
 
     }
 
-    public void update(){
+    public void update() {
         Employee model = getModel();
         try {
             daoEm.update(model);
             loadEmployee();
             lblStt.setText("Update thành công");
-           
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void delete(){
+
+    public void delete() {
         String maNV = (String) tbEmployee.getValueAt(index, 0);
         try {
+
             daoEm.delete(maNV);
             loadEmployee();
             lblStt.setText("Delete thành công");
@@ -662,7 +669,7 @@ insert();
         } catch (Exception e) {
         }
     }
-    
+
     public Employee getModel() {
         Employee model = new Employee();
         model.setMaNV(txtUsername.getText());
@@ -734,12 +741,11 @@ insert();
             return false;
         }
 
-        
         if (txtSdt.getText().equals("")) {
             lblStt.setText("Sdt không dc để trống");
             return false;
         }
-        
+
         if (txtDiaChi.getText().equals("")) {
             lblStt.setText("Địa chỉ không dc để trống");
             return false;
@@ -749,15 +755,15 @@ insert();
             return false;
         }
 
-        if (((JTextField)txtNgaySinh.getDateEditor().getUiComponent()).getText().equals("")) {
+        if (((JTextField) txtNgaySinh.getDateEditor().getUiComponent()).getText().equals("")) {
             lblStt.setText("Ngày sinh ko dc để trống");
-                    return false;
+            return false;
         }
-        if (((JTextField)txtNgayVaoLam.getDateEditor().getUiComponent()).getText().equals("")) {
+        if (((JTextField) txtNgayVaoLam.getDateEditor().getUiComponent()).getText().equals("")) {
             lblStt.setText("Ngày vào làm ko dc để trống");
-                    return false;
+            return false;
         }
-        
+
         return true;
     }
 
