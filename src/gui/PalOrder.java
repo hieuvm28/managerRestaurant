@@ -616,7 +616,7 @@ public class PalOrder extends javax.swing.JPanel {
     private void btnBillMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBillMousePressed
         try {
             //JdbcHelper.getConnect();
-            JasperDesign jdesign = JRXmlLoader.load("E:\\Software Manager\\RestaurantManager\\RestaurantManager\\src\\report\\BillShip.jrxml");
+            JasperDesign jdesign = JRXmlLoader.load("E:\\Alige&Scrum\\managerRestaurant\\src\\report\\BillShip.jrxml");
 
             String maHX = lblMaHX.getText();
             String sql = "select * from HangXuat join Menu on HangXuat.MaMon = Menu.MaMon where MaHX = '" + maHX + "'";

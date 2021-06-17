@@ -3,35 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/FrmLogin.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/model/Table.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/FrmMain.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/model/Menu.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Table.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/FrmTable.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/FrmOrder.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalOrder.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalHome.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/model/Employee.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Employee.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalEmployee.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Book.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/jdbcHelper/ShareHelper.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/FrmCategory.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalPurchase.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalStatistical.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/nbproject/build-impl.xml</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Category.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Statistical.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Ship.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_HoaDon.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/FrmWelcome.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_HoaDonCT.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalMemu.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/dao/DAO_Menu.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/gui/PalBook.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/jdbcHelper/JdbcHelper.java</file>
-            <file>file:/E:/Software%20Manager/RestaurantManager/RestaurantManager/src/model/Statistical.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/model/HoaDonCT.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/dao/DAO_Table.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/gui/PalHome.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/model/HoaDon.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/dao/DAO_HoaDonCT.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/gui/PalEmployee.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/model/Statistical.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/model/Employee.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/dao/DAO_Purchase.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/model/Table.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/dao/DAO_HoaDon.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/gui/FrmLogin.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/gui/FrmOrder.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/gui/PalPurchase.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/gui/PalStatistical.java</file>
+            <file>file:/E:/Alige&amp;Scrum/managerRestaurant/src/dao/DAO_Statistical.java</file>
         </group>
     </open-files>
 </project-private>

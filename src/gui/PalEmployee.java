@@ -674,28 +674,26 @@ public class PalEmployee extends javax.swing.JPanel {
         Employee model = new Employee();
         model.setMaNV(txtUsername.getText());
         model.setMatKhau(String.valueOf(txtPassword.getPassword()));
-        String ngaySinh = ((JTextField) txtNgaySinh.getDateEditor().getUiComponent()).getText();
-        model.setNgaySinh(ngaySinh);
         model.setName(txtName.getText());
-        boolean sex;
+        model.setSdt(txtSdt.getText());
+        model.setDiaChi(txtDiaChi.getText());
+        String ngaySing = ((JTextField) txtNgaySinh.getDateEditor().getUiComponent()).getText();
+        model.setNgaySinh(ngaySing);
+        String ngayVaoLam= ((JTextField) txtNgayVaoLam.getDateEditor().getUiComponent()).getText();
+        model.setNgayDK(ngayVaoLam);
+         boolean sex;
         if (radNam.isSelected()) {
             sex = true;
         } else {
             sex = false;
         }
         model.setSex(sex);
-        model.setSdt(txtSdt.getText());
-        String NgayDK = ((JTextField) txtNgayVaoLam.getDateEditor().getUiComponent()).getText();
-        model.setNgayDK(NgayDK);
-        model.setDiaChi(txtDiaChi.getText());
         boolean role;
         if (radAdmin.isSelected()) {
             role = true;
         } else {
             role = false;
         }
-        model.setRole(role);
-        model.setHinh(lblImage.getToolTipText());
         return model;
     }
 

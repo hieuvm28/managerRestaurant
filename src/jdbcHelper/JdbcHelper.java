@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class JdbcHelper {
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static String dburl = "jdbc:sqlserver://DESKTOP-0GHR3KF\\HIEUVM:49797;databaseName=RESTRMANAGER";
+    private static String dburl = "jdbc:sqlserver://DESKTOP-0GHR3KF\\\\HIEUVM:49797;databaseName=RESTRMANAGER";
     private static String username = "sa";
     private static String password = "sa123456";
     

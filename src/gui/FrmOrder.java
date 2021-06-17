@@ -629,8 +629,8 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
     private void btnBillMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBillMousePressed
         try {
             //JdbcHelper.getConnect();
-            JasperDesign jdesign = JRXmlLoader.load("E:\\Software Manager\\RestaurantManager\\RestaurantManager\\src\\report\\Bill.jrxml");
-
+        //    JasperDesign jdesign = JRXmlLoader.load("E:\\Software Manager\\RestaurantManager\\RestaurantManager\\src\\report\\Bill.jrxml");
+ JasperDesign jdesign = JRXmlLoader.load("E:\\Alige&Scrum\\managerRestaurant\\src\\report\\Bill.jrxml");
             String maHD = lblMaHD.getText();
             String sql = "select HoaDonChiTiet.MaHD, HoaDonChiTiet.MaMon, Menu.TenMon, HoaDon.MaBan, Ban.TenBan, HoaDonChiTiet.SoLuong, HoaDonChiTiet.DonGia,MaNhanVien, NgayLap, Gio\n"
                     + "from Ban join HoaDon on Ban.MaBan = HoaDon.MaBan\n"
@@ -827,7 +827,7 @@ public class FrmOrder extends javax.swing.JFrame implements Runnable {
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
                 } catch (Exception e) {                 
                    JOptionPane.showMessageDialog(this, "Đã có món này");
-                  
+                
                     return;
                 }
 
